@@ -111,6 +111,10 @@ def update_mfa_credentials(credentials_path, mfa_profile_name, access_key,
         "MFA credentials stored in profile '{}'".format(mfa_profile_name))
 
 
+def export_variable(name, value):
+    print("export {}={}".format(name.upper(), value))
+
+
 def main():
     p = argparse.ArgumentParser(
         formatter_class=argparse.ArgumentDefaultsHelpFormatter)
@@ -164,6 +168,9 @@ def main():
     mfa_profile_name = "mfa-{}".format(args.profile)
     update_mfa_credentials(args.credentials_path, mfa_profile_name, access_key,
                            secret_access_key, session_token)
+    export_variable("AWS_ACCESS_KEY_ID", access_key)
+    export_variable("AWS_SECRET_ACCESS_KEY", secret_access_key)
+    export_variable("AWS_SESSION_TOKEN", session_token)
 
 
 if __name__ == "__main__":
